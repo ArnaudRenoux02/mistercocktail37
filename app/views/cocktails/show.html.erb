@@ -1,4 +1,32 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Page du Cocktail <%= @cocktail.name %></h1>
+
+
+<p>Les doses du cocktails </p>
+
+<ul>
+  <% @cocktail.doses.each do |dose| %>
+  <li>
+    <%= "#{dose.ingredient.name} - #{dose.description}" %>
+    <%= link_to cocktail_dose_path(@cocktail, dose), method: :delete do %>
+    <i class="fa fa-trash"></i>
+    <% end %>
+
+  </li>
+  <% end %>
+</ul>
+
+<%= link_to "ajouter une dose", new_cocktail_dose_path(@cocktail)%>
 <%= link_to 'Edit', edit_cocktail_path(@cocktail) %> |
 <%= link_to 'Back', cocktails_path %>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+
+      <%= render partial: 'doses/form' %>
+    </div>
+  </div>
+</div>
